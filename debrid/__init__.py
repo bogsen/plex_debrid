@@ -26,8 +26,11 @@ def download(element, stream=True, query='', force=False):
                         break
             if downloaded:
                 break
-        if len(element.Releases) > 0:
-            element.Releases[0].files = downloaded_files
+        if downloaded:
+            if len(element.Releases) > 0:
+                element.Releases[0].files = downloaded_files
+        else:
+            element.Releases = cached_releases
         return downloaded
     else:
         scraped_releases = copy.deepcopy(element.Releases)
@@ -52,8 +55,11 @@ def download(element, stream=True, query='', force=False):
                         break
             if downloaded:
                 break
-        if len(element.Releases) > 0:
-            element.Releases[0].files = downloaded_files
+        if downloaded:
+            if len(element.Releases) > 0:
+                element.Releases[0].files = downloaded_files
+        else:
+            element.Releases = scraped_releases
         return downloaded
 
 # Check Method:
